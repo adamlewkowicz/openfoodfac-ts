@@ -17,8 +17,8 @@ describe('OpenFoodFactsApi', () => {
         ok: true,
         json: async () => openFoodFactsResponseMock
       }));
-    
-      const product = await openFoodFactsApi.findOneByBarcode(ean);
+
+      const product = await openFoodFactsApi.findProductByBarcode(ean);
     
       expect(fetchMock).toHaveBeenCalledTimes(1);
       expect(product).toMatchSnapshot();

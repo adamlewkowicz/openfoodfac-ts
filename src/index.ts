@@ -30,7 +30,7 @@ export class OpenFoodFactsApi {
     this.baseUrl = `https://${this.country}.openfoodfacts.org`;
   }
 
-  async findOneByBarcode(
+  async findProductByBarcode(
     barcode: string,
     controller?: AbortController
   ): Promise<ApiTypes.Product | null> {
@@ -43,7 +43,7 @@ export class OpenFoodFactsApi {
     return response?.product ?? null;
   }
 
-  async findByBrand(
+  async findProductsByBrand(
     brandName: string,
     page = 1,
     controller?: AbortController
@@ -51,7 +51,7 @@ export class OpenFoodFactsApi {
     return this.request(`/brand/${brandName}/${page}`, controller);
   }
   
-  async findByCategory(
+  async findProductsByCategory(
     category: string,
     page = 1,
     controller?: AbortController
