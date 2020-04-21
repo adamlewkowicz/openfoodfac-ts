@@ -1,3 +1,3 @@
 const globalObject: any = global;
 
-globalObject.fetch = jest.genMockFromModule('node-fetch');
+globalObject.fetch = require('node-fetch');
