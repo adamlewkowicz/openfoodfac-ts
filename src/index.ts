@@ -153,3 +153,5 @@ export class OpenFoodFactsApi {
 }
 
 export default OpenFoodFactsApi;
+
+export { ApiTypes };
