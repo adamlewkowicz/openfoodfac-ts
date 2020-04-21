@@ -13,14 +13,12 @@ const defaultOptions: Options = {
 
 export class OpenFoodFactsApi {
   
-  baseUrl: string;
+  private baseUrl: string;
 
-  country: string;
+  private country: string;
 
-  userAgent?: string;
+  private userAgent?: string;
 
-  notFoundStatus: 0 = 0;
-  
   constructor(options: Partial<Options> = defaultOptions) {
     const mergedOptions = {
       ...defaultOptions,
@@ -32,12 +30,12 @@ export class OpenFoodFactsApi {
     this.baseUrl = `https://${this.country}.openfoodfacts.org`;
   }
 
-  async findOneByEan(
+  async findOneByBarcode(
     barcode: string,
     controller?: AbortController
   ): Promise<ApiTypes.Product | null> {
 
-    const response = await this.request<ApiTypes.ResponseEan>(
+    const response = await this.request<ApiTypes.ProductResponse>(
       `/api/v0/product/${barcode}.json`,
       controller
     );
@@ -45,38 +43,111 @@ export class OpenFoodFactsApi {
     return response?.product ?? null;
   }
 
+  async findByBrand(
+    brandName: string,
+    page = 1,
+    controller?: AbortController
+  ): Promise<ApiTypes.ProductsResponse> {
+    return this.request(`/brand/${brandName}/${page}.json`, controller);
+  }
+  
   async findByCategory(
     category: string,
     page = 1,
     controller?: AbortController
-  ): Promise<unknown> {
-
-    const response = await fetchify(
-      `${this.baseUrl}/category/${category}/${page}.json`,
-      { headers: { 'User-Agent': this.userAgent }},
-      controller
-    );
-
-    return response;
+  ): Promise<ApiTypes.ProductsResponse> {
+    return this.request(`/category/${category}/${page}.json`, controller);
   }
 
-  private async request<T extends ApiTypes.BaseResponse>(
-    url: string,
+  async findCategories(
+    controller?: AbortController
+  ): Promise<ApiTypes.CategoriesResponse> {
+    return this.request(`/categories.json`, controller);
+  }
+
+  async findCountries(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindCountriesResponse> {
+    return this.request('/countries.json', controller);
+  }
+
+  async findIngredients(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindIngredientsResponse> {
+    return this.request('/ingredients.json', controller);
+  }
+
+  async findPackagings(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindPackagingsResponse> {
+    return this.request('/packaging.json', controller);
+  }
+
+  async findPackagingCodes(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindPackagingCodesResponse> {
+    return this.request('/packager-codes.json', controller);
+  }
+
+  async findPurchasePlaces(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindPurchasePlacesResponse> {
+    return this.request('/purchase-places.json', controller);
+  }
+
+  async findStates(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindStatesResponse> {
+    return this.request('/states.json', controller);
+  }
+
+  async findTraces(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindTracesResponse> {
+    return this.request('/traces.json', controller);
+  }
+
+  async findEntryDates(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindEntryDatesResponse> {
+    return this.request('/entry-dates.json', controller);
+  }
+
+  async findAllergens(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindAllergensResponse> {
+    return this.request('/allergens.json', controller);
+  }
+
+  async findAdditives(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindAdditivesResponse> {
+    return this.request('/additives.json', controller);
+  }
+
+  async findLanguages(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindLanguagesResponse> {
+    return this.request('/languages.json', controller);
+  }
+
+  async findBrands(
+    controller?: AbortController
+  ): Promise<ApiTypes.FindBrandsResponse> {
+    return this.request('/brands.json', controller);
+  }
+
+  private async request<T extends object>(
+    apiPath: string,
     controller?: AbortController,
-  ): Promise<T | null> {
+  ): Promise<T> {
     const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
 
-    const response = await fetchify<T>(
-      `${this.baseUrl}${url}`,
+    return fetchify<T>(
+      `${this.baseUrl}${apiPath}`,
       { headers },
       controller,
     );
-
-    if (response.status === this.notFoundStatus) {
-      return null;
-    }
-
-    return response;
   }
 
 }
