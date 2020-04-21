@@ -2,8 +2,15 @@ import * as ApiTypes from './types';
 import { fetchify } from '../fetchify';
 
 interface Options {
-  /** @default world */
+  /**
+   * Country id.
+   * List of countries https://world.openfoodfacts.org/countries.
+   * @default 'world'
+   */
   country: string
+  /**
+   * User Agent used while requesting the API.
+   */
   userAgent?: string
 }
 
