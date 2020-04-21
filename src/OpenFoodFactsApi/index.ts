@@ -54,7 +54,7 @@ export class OpenFoodFactsApi {
     searchTerm: string,
     page = 1,
     controller?: AbortController,
-  ): Promise<ApiTypes.ProductsResponse | null> {
+  ): Promise<ApiTypes.ProductsResponse> {
     const parsedTerm = encodeURIComponent(searchTerm);
 
     const response = await this.request<ApiTypes.ProductsResponse>(
