@@ -7,10 +7,10 @@ describe('OpenFoodFactsApi', () => {
 
   beforeEach(() => openFoodFactsApi = new OpenFoodFactsApi());
 
-  describe('findByBarcode()', () => {
+  describe('findOneByEan()', () => {
 
     it('should normalize product correctly 📝', async () => {
-      const barcode = '5900512300108';
+      const ean = '5900512300108';
       const fetchMock = fetch as jest.Mock;
     
       fetchMock.mockImplementationOnce(async () => ({
@@ -18,10 +18,10 @@ describe('OpenFoodFactsApi', () => {
         json: async () => openFoodFactsResponseMock
       }));
     
-      const normalizedProduct = await openFoodFactsApi.findByBarcode(barcode);
+      const product = await openFoodFactsApi.findOneByEan(ean);
     
       expect(fetchMock).toHaveBeenCalledTimes(1);
-      expect(normalizedProduct).toMatchSnapshot();
+      expect(product).toMatchSnapshot();
     });
 
   });

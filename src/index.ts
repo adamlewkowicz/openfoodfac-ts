@@ -13,7 +13,7 @@ const defaultOptions: Options = {
 
 export class OpenFoodFactsApi {
   
-  url: string;
+  baseUrl: string;
 
   country: string;
 
@@ -29,10 +29,10 @@ export class OpenFoodFactsApi {
 
     this.userAgent = mergedOptions.userAgent;
     this.country = mergedOptions.country;
-    this.url = `https://${this.country}.openfoodfacts.org`;
+    this.baseUrl = `https://${this.country}.openfoodfacts.org`;
   }
 
-  async findByBarcode(
+  async findOneByEan(
     barcode: string,
     controller?: AbortController
   ): Promise<ApiTypes.Product | null> {
@@ -52,7 +52,7 @@ export class OpenFoodFactsApi {
   ): Promise<unknown> {
 
     const response = await fetchify(
-      `${this.url}/category/${category}/${page}.json`,
+      `${this.baseUrl}/category/${category}/${page}.json`,
       { headers: { 'User-Agent': this.userAgent }},
       controller
     );
@@ -61,12 +61,13 @@ export class OpenFoodFactsApi {
   }
 
   private async request<T extends ApiTypes.BaseResponse>(
-    url: string, controller?: AbortController
+    url: string,
+    controller?: AbortController,
   ): Promise<T | null> {
     const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
 
     const response = await fetchify<T>(
-      `${this.url}${url}`,
+      `${this.baseUrl}${url}`,
       { headers },
       controller,
     );
