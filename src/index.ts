@@ -1,4 +1,5 @@
 import * as ApiTypes from './types';
+import { fetchify } from './fetchify';
 
 interface Options {
   /** @default world */
@@ -12,7 +13,7 @@ const defaultOptions: Options = {
 
 export class OpenFoodFactsApi {
   
-  URL: string;
+  url: string;
 
   country: string;
 
@@ -28,12 +29,7 @@ export class OpenFoodFactsApi {
 
     this.userAgent = mergedOptions.userAgent;
     this.country = mergedOptions.country;
-    this.URL = `https://${this.country}.openfoodfacts.org`;
-  }
-
-  // @ts-ignore
-  async fetchify<T>(...args: any[]): Promise<T> {
-
+    this.url = `https://${this.country}.openfoodfacts.org`;
   }
 
   async findByBarcode(
@@ -41,20 +37,12 @@ export class OpenFoodFactsApi {
     controller?: AbortController
   ): Promise<ApiTypes.Product | null> {
 
-    const response = await this.fetchify<ApiTypes.ResponseEan>(
-      `${this.URL}/api/v0/product/${barcode}.json`,
-      { headers: { 'User-Agent': this.userAgent }},
+    const response = await this.request<ApiTypes.ResponseEan>(
+      `/api/v0/product/${barcode}.json`,
       controller
     );
 
-    if (
-      response.status === this.notFoundStatus ||
-      response.product == null
-    ) {
-      return null;
-    }
-
-    return response.product;
+    return response?.product ?? null;
   }
 
   async findByCategory(
@@ -63,11 +51,29 @@ export class OpenFoodFactsApi {
     controller?: AbortController
   ): Promise<unknown> {
 
-    const response = await this.fetchify(
-      `${this.URL}/category/${category}/${page}.json`,
+    const response = await fetchify(
+      `${this.url}/category/${category}/${page}.json`,
       { headers: { 'User-Agent': this.userAgent }},
       controller
     );
+
+    return response;
+  }
+
+  private async request<T extends ApiTypes.BaseResponse>(
+    url: string, controller?: AbortController
+  ): Promise<T | null> {
+    const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
+
+    const response = await fetchify<T>(
+      `${this.url}${url}`,
+      { headers },
+      controller,
+    );
+
+    if (response.status === this.notFoundStatus) {
+      return null;
+    }
 
     return response;
   }
