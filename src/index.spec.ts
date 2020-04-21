@@ -4,7 +4,12 @@ describe('OpenFoodFactsApi', () => {
 
   let openFoodFactsApi: OpenFoodFactsApi;
 
-  beforeEach(() => openFoodFactsApi = new OpenFoodFactsApi());
+  beforeEach(() => {
+    openFoodFactsApi = new OpenFoodFactsApi({
+      country: 'world',
+      userAgent: 'Mozilla/5.0 ...'
+    });
+  });
 
   describe('findProductByBarcode()', () => {
 
