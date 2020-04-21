@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OpenFoodFactsApi findByBarcode() should normalize product correctly 📝 1`] = `
+Object {
+  "_id": "5900512300108",
+  "images": Array [
+    "https://static.openfoodfacts.org/images/products/590/051/230/0108/front_en.3.400.jpg",
+    "https://static.openfoodfacts.org/images/products/590/051/230/0108/nutrition_pl.22.400.jpg",
+  ],
+  "macro": Object {
+    "carbs": 1,
+    "fats": 82,
+    "fattyAcids": 54,
+    "kcal": 746,
+    "prots": 1,
+    "sugars": 1,
+  },
+  "name": "Masło extra",
+  "portion": 10,
+  "portions": Array [
+    Object {
+      "type": "portion",
+      "unit": "g",
+      "value": 10,
+    },
+  ],
+}
+`;
