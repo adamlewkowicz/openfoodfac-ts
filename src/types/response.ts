@@ -1,4 +1,5 @@
-import { Product } from 'types/product';
+import { Product } from './product';
+import { Tag } from './tag';
 
 export interface ProductResponse {
   status?: number;
@@ -18,12 +19,4 @@ export interface ProductsResponse {
 export interface TagsResponse {
   tags: Tag[];
   count: number;
-}
-interface Tag {
-  url: string;
-  products: number;
-  known: number;
-  name: string;
-  id: string;
-  sameAs?: string[];
 }
