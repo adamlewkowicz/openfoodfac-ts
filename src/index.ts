@@ -36,7 +36,7 @@ export class OpenFoodFactsApi {
   ): Promise<ApiTypes.Product | null> {
 
     const response = await this.request<ApiTypes.ProductResponse>(
-      `/api/v0/product/${barcode}.json`,
+      `/api/v0/product/${barcode}`,
       controller
     );
 
@@ -48,7 +48,7 @@ export class OpenFoodFactsApi {
     page = 1,
     controller?: AbortController
   ): Promise<ApiTypes.ProductsResponse> {
-    return this.request(`/brand/${brandName}/${page}.json`, controller);
+    return this.request(`/brand/${brandName}/${page}`, controller);
   }
   
   async findByCategory(
@@ -56,85 +56,85 @@ export class OpenFoodFactsApi {
     page = 1,
     controller?: AbortController
   ): Promise<ApiTypes.ProductsResponse> {
-    return this.request(`/category/${category}/${page}.json`, controller);
+    return this.request(`/category/${category}/${page}`, controller);
   }
 
   async findCategories(
     controller?: AbortController
   ): Promise<ApiTypes.CategoriesResponse> {
-    return this.request(`/categories.json`, controller);
+    return this.request(`/categories`, controller);
   }
 
   async findCountries(
     controller?: AbortController
   ): Promise<ApiTypes.FindCountriesResponse> {
-    return this.request('/countries.json', controller);
+    return this.request('/countries', controller);
   }
 
   async findIngredients(
     controller?: AbortController
   ): Promise<ApiTypes.FindIngredientsResponse> {
-    return this.request('/ingredients.json', controller);
+    return this.request('/ingredients', controller);
   }
 
   async findPackagings(
     controller?: AbortController
   ): Promise<ApiTypes.FindPackagingsResponse> {
-    return this.request('/packaging.json', controller);
+    return this.request('/packaging', controller);
   }
 
   async findPackagingCodes(
     controller?: AbortController
   ): Promise<ApiTypes.FindPackagingCodesResponse> {
-    return this.request('/packager-codes.json', controller);
+    return this.request('/packager-codes', controller);
   }
 
   async findPurchasePlaces(
     controller?: AbortController
   ): Promise<ApiTypes.FindPurchasePlacesResponse> {
-    return this.request('/purchase-places.json', controller);
+    return this.request('/purchase-places', controller);
   }
 
   async findStates(
     controller?: AbortController
   ): Promise<ApiTypes.FindStatesResponse> {
-    return this.request('/states.json', controller);
+    return this.request('/states', controller);
   }
 
   async findTraces(
     controller?: AbortController
   ): Promise<ApiTypes.FindTracesResponse> {
-    return this.request('/traces.json', controller);
+    return this.request('/traces', controller);
   }
 
   async findEntryDates(
     controller?: AbortController
   ): Promise<ApiTypes.FindEntryDatesResponse> {
-    return this.request('/entry-dates.json', controller);
+    return this.request('/entry-dates', controller);
   }
 
   async findAllergens(
     controller?: AbortController
   ): Promise<ApiTypes.FindAllergensResponse> {
-    return this.request('/allergens.json', controller);
+    return this.request('/allergens', controller);
   }
 
   async findAdditives(
     controller?: AbortController
   ): Promise<ApiTypes.FindAdditivesResponse> {
-    return this.request('/additives.json', controller);
+    return this.request('/additives', controller);
   }
 
   async findLanguages(
     controller?: AbortController
   ): Promise<ApiTypes.FindLanguagesResponse> {
-    return this.request('/languages.json', controller);
+    return this.request('/languages', controller);
   }
 
   async findBrands(
     controller?: AbortController
   ): Promise<ApiTypes.FindBrandsResponse> {
-    return this.request('/brands.json', controller);
+    return this.request('/brands', controller);
   }
 
   private async request<T extends object>(
@@ -144,7 +144,7 @@ export class OpenFoodFactsApi {
     const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
 
     return fetchify<T>(
-      `${this.baseUrl}${apiPath}`,
+      `${this.baseUrl}${apiPath}.json`,
       { headers },
       controller,
     );
