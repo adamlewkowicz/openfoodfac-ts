@@ -31,6 +31,7 @@ export class OpenFoodFactsApi {
     this.URL = `https://${this.country}.openfoodfacts.org`;
   }
 
+  // @ts-ignore
   async fetchify<T>(...args: any[]): Promise<T> {
 
   }
