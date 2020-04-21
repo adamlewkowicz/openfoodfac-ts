@@ -61,79 +61,79 @@ export class OpenFoodFactsApi {
 
   async findCategories(
     controller?: AbortController
-  ): Promise<ApiTypes.CategoriesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request(`/categories`, controller);
   }
 
   async findCountries(
     controller?: AbortController
-  ): Promise<ApiTypes.FindCountriesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/countries', controller);
   }
 
   async findIngredients(
     controller?: AbortController
-  ): Promise<ApiTypes.FindIngredientsResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/ingredients', controller);
   }
 
   async findPackagings(
     controller?: AbortController
-  ): Promise<ApiTypes.FindPackagingsResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/packaging', controller);
   }
 
   async findPackagingCodes(
     controller?: AbortController
-  ): Promise<ApiTypes.FindPackagingCodesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/packager-codes', controller);
   }
 
   async findPurchasePlaces(
     controller?: AbortController
-  ): Promise<ApiTypes.FindPurchasePlacesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/purchase-places', controller);
   }
 
   async findStates(
     controller?: AbortController
-  ): Promise<ApiTypes.FindStatesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/states', controller);
   }
 
   async findTraces(
     controller?: AbortController
-  ): Promise<ApiTypes.FindTracesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/traces', controller);
   }
 
   async findEntryDates(
     controller?: AbortController
-  ): Promise<ApiTypes.FindEntryDatesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/entry-dates', controller);
   }
 
   async findAllergens(
     controller?: AbortController
-  ): Promise<ApiTypes.FindAllergensResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/allergens', controller);
   }
 
   async findAdditives(
     controller?: AbortController
-  ): Promise<ApiTypes.FindAdditivesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/additives', controller);
   }
 
   async findLanguages(
     controller?: AbortController
-  ): Promise<ApiTypes.FindLanguagesResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/languages', controller);
   }
 
   async findBrands(
     controller?: AbortController
-  ): Promise<ApiTypes.FindBrandsResponse> {
+  ): Promise<ApiTypes.TagsResponse> {
     return this.request('/brands', controller);
   }
 
