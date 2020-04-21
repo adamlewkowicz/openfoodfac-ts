@@ -12,9 +12,25 @@ Open Food Facts Api written in TypeScript 🥫🍕🍼
 ```ts
 import { OpenFoodFactsApi } from 'openfoodfac-ts';
 
+const foodFactsApi = new OpenFoodFactsApi();
+
+const product = await foodFactsApi.findProductByBarcode('58918274712');
+```
+
+### Usage with config 🛠️
+
+```ts
+import { OpenFoodFactsApi } from 'openfoodfac-ts';
+
 const foodFactsApiPl = new OpenFoodFactsApi({
+  /**
+   * Country id.
+   * List of countries https://world.openfoodfacts.org/countries.
+   */
   country: 'pl', // 'world' by default
-  userAgent: 'Mozilla/5.0 ...'
+  
+  /** User Agent used while requesting the API. */
+  userAgent?: 'Mozilla/5.0 ...'
 });
 
 const product = await foodFactsApiPl.findProductByBarcode('58918274712');
