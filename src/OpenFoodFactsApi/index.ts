@@ -12,40 +12,34 @@ interface Options {
    * User Agent used while requesting the API.
    */
   userAgent?: string
-}
-
-const defaultOptions: Options = {
-  country: 'world',
+  /**
+   * AbortController instance used while requesting the API.
+   * Allows you to cancel request at any time.
+   */
+  abortController?: AbortController
 }
 
 export class OpenFoodFactsApi {
   
   private baseUrl: string;
-
   private country: string;
-
   private userAgent?: string;
+  private abortController?: AbortController;
 
-  constructor(options: Partial<Options> = defaultOptions) {
+  constructor(options: Partial<Options> = DEFAULT_OPTIONS) {
     const mergedOptions = {
-      ...defaultOptions,
+      ...DEFAULT_OPTIONS,
       ...options
     };
 
     this.userAgent = mergedOptions.userAgent;
     this.country = mergedOptions.country;
+    this.abortController = mergedOptions.abortController;
     this.baseUrl = `https://${this.country}.openfoodfacts.org`;
   }
 
-  async findProductByBarcode(
-    barcode: string,
-    controller?: AbortController
-  ): Promise<ApiTypes.Product | null> {
-
-    const response = await this.request<ApiTypes.ProductResponse>(
-      `/api/v0/product/${barcode}`,
-      controller
-    );
+  async findProductByBarcode(barcode: string): Promise<ApiTypes.Product | null> {
+    const response = await this.request<ApiTypes.ProductResponse>(`/api/v0/product/${barcode}`);
 
     return response?.product ?? null;
   }
@@ -53,13 +47,11 @@ export class OpenFoodFactsApi {
   async findProductsBySearchTerm(
     searchTerm: string,
     page = 1,
-    controller?: AbortController,
   ): Promise<ApiTypes.ProductsResponse> {
     const parsedTerm = encodeURIComponent(searchTerm);
 
     const response = await this.request<ApiTypes.ProductsResponse>(
-      `/cgi/search.pl?search_terms=${parsedTerm}&page=${page}&search_simple=1&action=process&json=1`,
-      controller
+      `/cgi/search.pl?search_terms=${parsedTerm}&page=${page}&search_simple=1&action=process&json=1`
     );
 
     return response;
@@ -68,108 +60,81 @@ export class OpenFoodFactsApi {
   async findProductsByBrand(
     brandName: string,
     page = 1,
-    controller?: AbortController
   ): Promise<ApiTypes.ProductsResponse> {
-    return this.request(`/brand/${brandName}/${page}`, controller);
+    return this.request(`/brand/${brandName}/${page}`);
   }
   
   async findProductsByCategory(
     category: string,
     page = 1,
-    controller?: AbortController
   ): Promise<ApiTypes.ProductsResponse> {
-    return this.request(`/category/${category}/${page}`, controller);
+    return this.request(`/category/${category}/${page}`);
   }
 
-  async findCategories(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request(`/categories`, controller);
+  async findCategories(): Promise<ApiTypes.TagsResponse> {
+    return this.request(`/categories`);
   }
 
-  async findCountries(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/countries', controller);
+  async findCountries(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/countries');
   }
 
-  async findIngredients(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/ingredients', controller);
+  async findIngredients(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/ingredients');
   }
 
-  async findPackagings(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/packaging', controller);
+  async findPackagings(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/packaging');
   }
 
-  async findPackagingCodes(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/packager-codes', controller);
+  async findPackagingCodes(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/packager-codes');
   }
 
-  async findPurchasePlaces(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/purchase-places', controller);
+  async findPurchasePlaces(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/purchase-places');
   }
 
-  async findStates(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/states', controller);
+  async findStates(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/states');
   }
 
-  async findTraces(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/traces', controller);
+  async findTraces(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/traces');
   }
 
-  async findEntryDates(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/entry-dates', controller);
+  async findEntryDates(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/entry-dates');
   }
 
-  async findAllergens(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/allergens', controller);
+  async findAllergens(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/allergens');
   }
 
-  async findAdditives(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/additives', controller);
+  async findAdditives(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/additives');
   }
 
-  async findLanguages(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/languages', controller);
+  async findLanguages(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/languages');
   }
 
-  async findBrands(
-    controller?: AbortController
-  ): Promise<ApiTypes.TagsResponse> {
-    return this.request('/brands', controller);
+  async findBrands(): Promise<ApiTypes.TagsResponse> {
+    return this.request('/brands');
   }
 
-  private async request<T extends object>(
-    apiPath: string,
-    controller?: AbortController,
-  ): Promise<T> {
+  private async request<T extends object>(apiPath: string): Promise<T> {
     const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
 
     return fetchify<T>(
       `${this.baseUrl}${apiPath}.json`,
       { headers },
-      controller,
+      this.abortController,
     );
   }
 
+}
+
+const DEFAULT_OPTIONS: Options = {
+  country: 'world',
 }
