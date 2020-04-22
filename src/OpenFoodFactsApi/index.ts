@@ -133,6 +133,11 @@ export class OpenFoodFactsApi {
     );
   }
 
+  setController(abortController: AbortController): this {
+    this.abortController = abortController;
+    return this;
+  }
+
 }
 
 const DEFAULT_OPTIONS: Options = {
