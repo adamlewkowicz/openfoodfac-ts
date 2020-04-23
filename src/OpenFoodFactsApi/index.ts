@@ -133,7 +133,7 @@ export class OpenFoodFactsApi {
     );
   }
 
-  setController(abortController: AbortController): this {
+  setController(abortController?: AbortController): this {
     this.abortController = abortController;
     return this;
   }
