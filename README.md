@@ -23,14 +23,20 @@ const product = await foodFactsApi.findProductByBarcode('58918274712');
 import { OpenFoodFactsApi } from 'openfoodfac-ts';
 
 const foodFactsApiPl = new OpenFoodFactsApi({
-  // Country id.
-  // List of countries https://world.openfoodfacts.org/countries.
-  country: 'pl', // 'world' by default
-  
-  // User Agent used while requesting the API
+  /**
+   * Country id.
+   * List of countries https://world.openfoodfacts.org/countries.
+   * @default 'world'
+   */
+  country: 'pl'
+  /**
+   * User Agent used while requesting the API.
+   */
   userAgent: 'Mozilla/5.0 ...'
-
-  // AbortController instance used while requesteding the API.
+  /**
+   * AbortController instance used while requesting the API.
+   * Allows you to cancel request at any time.
+   */
   abortController: new AbortController()
 });
 
