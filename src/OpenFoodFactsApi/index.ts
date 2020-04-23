@@ -123,6 +123,11 @@ export class OpenFoodFactsApi {
     return this.request('/brands');
   }
 
+  setController(abortController?: AbortController): this {
+    this.abortController = abortController;
+    return this;
+  }
+
   private async request<T extends object>(apiPath: string): Promise<T> {
     const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
 
@@ -131,11 +136,6 @@ export class OpenFoodFactsApi {
       { headers },
       this.abortController,
     );
-  }
-
-  setController(abortController?: AbortController): this {
-    this.abortController = abortController;
-    return this;
   }
 
 }
