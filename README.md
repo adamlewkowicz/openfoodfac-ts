@@ -42,3 +42,48 @@ const foodFactsApiPl = new OpenFoodFactsApi({
 
 const product = await foodFactsApiPl.findProductByBarcode('58918274712');
 ```
+
+## API
+```ts
+class OpenFoodFactsApi {
+
+    findProductByBarcode(barcode: string): Promise<ApiTypes.Product | null>;
+    
+    findProductsBySearchTerm(searchTerm: string, page?: number): Promise<ApiTypes.ProductsResponse>;
+    
+    findProductsByBrand(brandName: string, page?: number): Promise<ApiTypes.ProductsResponse>;
+    
+    findProductsByCategory(category: string, page?: number): Promise<ApiTypes.ProductsResponse>;
+    
+    findCategories(): Promise<ApiTypes.TagsResponse>;
+    
+    findCountries(): Promise<ApiTypes.TagsResponse>;
+    
+    findIngredients(): Promise<ApiTypes.TagsResponse>;
+    
+    findPackagings(): Promise<ApiTypes.TagsResponse>;
+    
+    findPackagingCodes(): Promise<ApiTypes.TagsResponse>;
+    
+    findPurchasePlaces(): Promise<ApiTypes.TagsResponse>;
+    
+    findStates(): Promise<ApiTypes.TagsResponse>;
+    
+    findTraces(): Promise<ApiTypes.TagsResponse>;
+    
+    findEntryDates(): Promise<ApiTypes.TagsResponse>;
+    
+    findAllergens(): Promise<ApiTypes.TagsResponse>;
+    
+    findAdditives(): Promise<ApiTypes.TagsResponse>;
+    
+    findLanguages(): Promise<ApiTypes.TagsResponse>;
+    
+    findBrands(): Promise<ApiTypes.TagsResponse>;
+    
+    setController(abortController?: AbortController): this;
+}
+```
+
+## License
+[MIT](LICENSE)
