@@ -72,7 +72,7 @@ export class OpenFoodFactsApi {
   }
 
   findCategories(): Promise<ApiTypes.TagsResponse> {
-    return this.request(`/categories`);
+    return this.request('/categories');
   }
 
   findCountries(): Promise<ApiTypes.TagsResponse> {
