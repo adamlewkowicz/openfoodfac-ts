@@ -57,69 +57,69 @@ export class OpenFoodFactsApi {
     return response;
   }
 
-  async findProductsByBrand(
+  findProductsByBrand(
     brandName: string,
     page = 1,
   ): Promise<ApiTypes.ProductsResponse> {
     return this.request(`/brand/${brandName}/${page}`);
   }
   
-  async findProductsByCategory(
+  findProductsByCategory(
     category: string,
     page = 1,
   ): Promise<ApiTypes.ProductsResponse> {
     return this.request(`/category/${category}/${page}`);
   }
 
-  async findCategories(): Promise<ApiTypes.TagsResponse> {
+  findCategories(): Promise<ApiTypes.TagsResponse> {
     return this.request(`/categories`);
   }
 
-  async findCountries(): Promise<ApiTypes.TagsResponse> {
+  findCountries(): Promise<ApiTypes.TagsResponse> {
     return this.request('/countries');
   }
 
-  async findIngredients(): Promise<ApiTypes.TagsResponse> {
+  findIngredients(): Promise<ApiTypes.TagsResponse> {
     return this.request('/ingredients');
   }
 
-  async findPackagings(): Promise<ApiTypes.TagsResponse> {
+  findPackagings(): Promise<ApiTypes.TagsResponse> {
     return this.request('/packaging');
   }
 
-  async findPackagingCodes(): Promise<ApiTypes.TagsResponse> {
+  findPackagingCodes(): Promise<ApiTypes.TagsResponse> {
     return this.request('/packager-codes');
   }
 
-  async findPurchasePlaces(): Promise<ApiTypes.TagsResponse> {
+  findPurchasePlaces(): Promise<ApiTypes.TagsResponse> {
     return this.request('/purchase-places');
   }
 
-  async findStates(): Promise<ApiTypes.TagsResponse> {
+  findStates(): Promise<ApiTypes.TagsResponse> {
     return this.request('/states');
   }
 
-  async findTraces(): Promise<ApiTypes.TagsResponse> {
+  findTraces(): Promise<ApiTypes.TagsResponse> {
     return this.request('/traces');
   }
 
-  async findEntryDates(): Promise<ApiTypes.TagsResponse> {
+  findEntryDates(): Promise<ApiTypes.TagsResponse> {
     return this.request('/entry-dates');
   }
 
-  async findAllergens(): Promise<ApiTypes.TagsResponse> {
+  findAllergens(): Promise<ApiTypes.TagsResponse> {
     return this.request('/allergens');
   }
 
-  async findAdditives(): Promise<ApiTypes.TagsResponse> {
+  findAdditives(): Promise<ApiTypes.TagsResponse> {
     return this.request('/additives');
   }
 
-  async findLanguages(): Promise<ApiTypes.TagsResponse> {
+  findLanguages(): Promise<ApiTypes.TagsResponse> {
     return this.request('/languages');
   }
 
-  async findBrands(): Promise<ApiTypes.TagsResponse> {
+  findBrands(): Promise<ApiTypes.TagsResponse> {
     return this.request('/brands');
   }
 
@@ -128,7 +128,7 @@ export class OpenFoodFactsApi {
     return this;
   }
 
-  private async request<T extends object>(apiPath: string): Promise<T> {
+  private request<T extends object>(apiPath: string): Promise<T> {
     const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
 
     return fetchify<T>(
