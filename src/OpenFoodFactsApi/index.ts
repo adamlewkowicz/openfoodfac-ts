@@ -128,6 +128,11 @@ export class OpenFoodFactsApi {
     return this;
   }
 
+  setUserAgent(userAgent?: string): this {
+    this.userAgent = userAgent;
+    return this;
+  }
+
   private request<T extends object>(apiPath: string): Promise<T> {
     const headers = this.userAgent ? { 'User-Agent': this.userAgent } : undefined;
 

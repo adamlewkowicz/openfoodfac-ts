@@ -82,6 +82,9 @@ class OpenFoodFactsApi {
     findBrands(): Promise<ApiTypes.TagsResponse>;
     
     setController(abortController?: AbortController): this;
+
+    setUserAgent(userAgent?: string): this;
+    
 }
 ```
 
