@@ -1,5 +1,6 @@
 import { OpenFoodFactsApi } from './index';
-import productResponse from './__mocks__/response.json';
+import productResponse from './__mocks__/product-response.json';
+import productsResponse from './__mocks__/products-response.json';
 
 describe('OpenFoodFactsApi', () => {
 
@@ -20,11 +21,31 @@ describe('OpenFoodFactsApi', () => {
       }));
     });
 
-    it('should return product object', async () => {
+    it('should return product response', async () => {
       const ean = '5900512300108';
       const product = await openFoodFactsApi.findProductByBarcode(ean);
     
-      expect(typeof product).toBe('object');
+      expect(product).toEqual(productResponse.product);
+    });
+
+  });
+
+  describe('findProductsBySearchTerm()', () => {
+
+    beforeEach(() => {
+      (fetch as jest.Mock).mockImplementationOnce(() => ({
+        ok: true,
+        async json() {
+          return productsResponse;
+        },
+      }));
+    });
+    
+    it('should return products response', async () => {
+      const searchTerm = 'drink';
+      const products = await openFoodFactsApi.findProductsBySearchTerm(searchTerm);
+      
+      expect(products).toEqual(productsResponse);
     });
 
   });
