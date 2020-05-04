@@ -1,6 +1,7 @@
 import { OpenFoodFactsApi } from './index';
 import productResponse from './__mocks__/product-response.json';
 import productsResponse from './__mocks__/products-response.json';
+import tagsResponse from './__mocks__/tags-response.json';
 
 describe('OpenFoodFactsApi', () => {
 
@@ -46,6 +47,25 @@ describe('OpenFoodFactsApi', () => {
       const products = await openFoodFactsApi.findProductsBySearchTerm(searchTerm);
       
       expect(products).toEqual(productsResponse);
+    });
+
+  });
+
+  describe('findCategories()', () => {
+
+    beforeEach(() => {
+      (fetch as jest.Mock).mockImplementationOnce(() => ({
+        ok: true,
+        async json() {
+          return tagsResponse;
+        },
+      }));
+    });
+
+    it('should return tags response', async () => {
+      const categoryTags = await openFoodFactsApi.findCategories();
+      
+      expect(categoryTags).toEqual(tagsResponse);
     });
 
   });

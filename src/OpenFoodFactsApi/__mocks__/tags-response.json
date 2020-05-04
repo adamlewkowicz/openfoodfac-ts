@@ -1,0 +1,53 @@
+{
+  "count": 6,
+  "tags": [
+    {
+      "known": 1,
+      "id": "en:plant-based-foods-and-beverages",
+      "name": "Plant-based foods and beverages",
+      "url": "https://world.openfoodfacts.org/category/plant-based-foods-and-beverages",
+      "products": 195273
+    },
+    {
+      "products": 167920,
+      "url": "https://world.openfoodfacts.org/category/plant-based-foods",
+      "known": 1,
+      "id": "en:plant-based-foods",
+      "name": "Plant-based foods"
+    },
+    {
+      "products": 132300,
+      "known": 1,
+      "id": "en:snacks",
+      "name": "Snacks",
+      "url": "https://world.openfoodfacts.org/category/snacks"
+    },
+    {
+      "url": "https://world.openfoodfacts.org/category/sweet-snacks",
+      "name": "Sweet snacks",
+      "id": "en:sweet-snacks",
+      "known": 1,
+      "products": 84668
+    },
+    {
+      "url": "https://world.openfoodfacts.org/category/beverages",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q40050"
+      ],
+      "known": 1,
+      "name": "Beverages",
+      "id": "en:beverages",
+      "products": 84378
+    },
+    {
+      "name": "Dairies",
+      "id": "en:dairies",
+      "known": 1,
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q185217"
+      ],
+      "url": "https://world.openfoodfacts.org/category/dairies",
+      "products": 69594
+    }
+  ]
+}
