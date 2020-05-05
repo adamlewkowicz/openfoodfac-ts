@@ -1,6 +1,8 @@
 # openfoodfac-ts
 
-Open Food Facts Api written in TypeScript 🥫🍕🍼
+[Open Food Facts](https://world.openfoodfacts.org/) Api written in TypeScript 🥫🍕🍼
+
+![Node CI](https://github.com/alk831/openfoodfac-ts/workflows/Node%20CI/badge.svg)
 
 ## Getting started
 
