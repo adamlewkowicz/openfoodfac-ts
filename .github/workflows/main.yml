@@ -21,6 +21,6 @@ jobs:
       run: npm install --silent
 
     - name: Run tests
-      run: npm run test -- ci
+      run: npm run test -- --ci
       env:
         CI: true
