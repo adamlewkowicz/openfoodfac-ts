@@ -43,7 +43,7 @@ const foodFactsApiPl = new OpenFoodFactsApi({
 const product = await foodFactsApiPl.findProductByBarcode('58918274712');
 ```
 
-## API
+## API 🗺
 ```ts
 class OpenFoodFactsApi {
 
@@ -88,5 +88,18 @@ class OpenFoodFactsApi {
 }
 ```
 
-## License
+## Testing 🚀
+
+### Usage with Jest
+
+There is a mock version available that uses mocked json response instead of making real API calls.
+
+To make it work, put below code in your `jest.setup.*` file.
+
+```ts
+// jest.setup.js/ts file:
+jest.mock('openfoodfac-ts/OpenFoodFactsApi');
+```
+
+## License ⚖️
 [MIT](LICENSE)
