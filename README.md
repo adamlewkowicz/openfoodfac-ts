@@ -94,10 +94,9 @@ class OpenFoodFactsApi {
 
 There is a mock version available that uses mocked json response instead of making real API calls.
 
-To make it work, put below code in your `jest.setup.*` file.
+To make it work, paste below code in your `jest.setup.*` file.
 
 ```ts
-// jest.setup.js/ts file:
 jest.mock('openfoodfac-ts/OpenFoodFactsApi');
 ```
 
