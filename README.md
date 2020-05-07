@@ -1,6 +1,8 @@
 # openfoodfac-ts
 
-Open Food Facts Api written in TypeScript 🥫🍕🍼
+[Open Food Facts](https://world.openfoodfacts.org/) Api written in TypeScript 🥫🍕🍼
+
+![Node CI](https://github.com/alk831/openfoodfac-ts/workflows/Node%20CI/badge.svg)
 
 ## Getting started
 
@@ -43,7 +45,7 @@ const foodFactsApiPl = new OpenFoodFactsApi({
 const product = await foodFactsApiPl.findProductByBarcode('58918274712');
 ```
 
-## API
+## API 🗺
 ```ts
 class OpenFoodFactsApi {
 
@@ -88,5 +90,17 @@ class OpenFoodFactsApi {
 }
 ```
 
-## License
+## Testing 🚀
+
+### Usage with Jest
+
+There is a mock version available that uses mocked json response instead of making real API calls.
+
+To make jest use mocked version, paste below code in your `jest.setup.*` file.
+
+```ts
+jest.mock('openfoodfac-ts/OpenFoodFactsApi');
+```
+
+## License ⚖️
 [MIT](LICENSE)
