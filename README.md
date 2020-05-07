@@ -10,7 +10,9 @@
 - Clean API ✨
 - Mock testing ready ✔
 
-## Getting started
+</br>
+
+## Getting started 🐾
 
 ### Installation 💿
 `npm i openfoodfac-ts`
@@ -20,9 +22,11 @@
 ```ts
 import { OpenFoodFactsApi } from 'openfoodfac-ts';
 
-const foodFactsApi = new OpenFoodFactsApi();
+const openFoodFactsApi = new OpenFoodFactsApi();
 
-const product = await foodFactsApi.findProductByBarcode('58918274712');
+const product = await openFoodFactsApi.findProductByBarcode('58918274712');
+
+const countries = await openFoodFactsApi.findCountries();
 ```
 
 ### Usage with config 🛠️
@@ -30,7 +34,7 @@ const product = await foodFactsApi.findProductByBarcode('58918274712');
 ```ts
 import { OpenFoodFactsApi } from 'openfoodfac-ts';
 
-const foodFactsApiPl = new OpenFoodFactsApi({
+const openFoodFactsApi = new OpenFoodFactsApi({
   /**
    * Country id.
    * List of countries https://world.openfoodfacts.org/countries.
@@ -48,7 +52,16 @@ const foodFactsApiPl = new OpenFoodFactsApi({
   abortController: new AbortController()
 });
 
-const product = await foodFactsApiPl.findProductByBarcode('58918274712');
+const products = await openFoodFactsApi.findProductsByCategory('vegetables');
+```
+
+### Setting abort controller dynamically
+```ts
+const abortController = new AbortController();
+
+const tomatoeProducts = await openFoodFactsApi
+  .setAbortController(abortController)
+  .findProductsBySearchTerm('Tomatoes');
 ```
 
 ## API 🗺
