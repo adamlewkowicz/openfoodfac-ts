@@ -44,17 +44,15 @@ export class OpenFoodFactsApi {
     return response?.product ?? null;
   }
 
-  async findProductsBySearchTerm(
+  findProductsBySearchTerm(
     searchTerm: string,
     page = 1,
   ): Promise<ApiTypes.ProductsResponse> {
     const parsedTerm = encodeURIComponent(searchTerm);
 
-    const response = await this.request<ApiTypes.ProductsResponse>(
+    return this.request<ApiTypes.ProductsResponse>(
       `/cgi/search.pl?search_terms=${parsedTerm}&page=${page}&search_simple=1&action=process&json=1`
     );
-
-    return response;
   }
 
   findProductsByBrand(
