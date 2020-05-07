@@ -4,6 +4,12 @@
 
 ![Node CI](https://github.com/alk831/openfoodfac-ts/workflows/Node%20CI/badge.svg)
 
+## Features 🚀
+
+- Complete TypeScript support with type-safe responses 💪
+- Clean API ✨
+- Mock testing ready ✔
+
 ## Getting started
 
 ### Installation 💿
@@ -90,7 +96,7 @@ class OpenFoodFactsApi {
 }
 ```
 
-## Testing 🚀
+## Testing 🧰
 
 ### Usage with Jest
 
