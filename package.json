@@ -32,7 +32,7 @@
   "module": "dist/openfoodfac-ts.esm.js",
   "devDependencies": {
     "husky": "^4.2.5",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "tsdx": "^0.13.2",
     "tslib": "^1.11.1",
     "typescript": "^3.8.3"
